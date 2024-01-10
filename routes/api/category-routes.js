@@ -1,8 +1,11 @@
+// // Import necessary modules
 const router = require("express").Router();
 const { Category, Product } = require("../../models");
 
 // The `/api/categories` endpoint
 
+// GET /api/categories
+// Fetches all categories along with their associated products
 router.get("/", async (req, res) => {
   // find all categories
   // be sure to include its associated Products
@@ -15,7 +18,8 @@ router.get("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+// GET /api/categories/:id
+// Fetches a single category by its ID, including its associated products
 router.get("/:id", async (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
@@ -34,7 +38,8 @@ router.get("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+// POST /api/categories
+// Creates a new category
 router.post("/", async (req, res) => {
   // create a new category
   try {
@@ -46,7 +51,8 @@ router.post("/", async (req, res) => {
     res.status(400).json(err);
   }
 });
-
+// PUT /api/categories/:id
+// Updates an existing category
 router.put("/:id", async (req, res) => {
   // update a category by its `id` value
   try {
@@ -64,7 +70,8 @@ router.put("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+// DELETE /api/categories/:id
+// Deletes a category by its ID
 router.delete("/:id", async (req, res) => {
   // delete a category by its `id` value
   try {
@@ -82,5 +89,5 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+// Export the router for use in other parts of the application
 module.exports = router;
