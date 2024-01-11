@@ -1,3 +1,4 @@
+// Import necessary modules from the Express and Sequelize libraries
 const router = require("express").Router();
 const { Product, Category, Tag, ProductTag } = require("../../models");
 
@@ -8,6 +9,7 @@ router.get("/", async (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
   try {
+    // Find all products, including associated Category and Tag data
     const productData = await Product.findAll({
       include: [{ model: Category }, { model: Tag, through: ProductTag }],
     });
@@ -22,6 +24,7 @@ router.get("/:id", async (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
   try {
+    // Find a single product by its `id`, including associated Category and Tag data
     const productData = await Product.findByPk(req.params.id, {
       include: [{ model: Category }, { model: Tag, through: ProductTag }],
     });
@@ -79,6 +82,7 @@ router.put("/:id", (req, res) => {
   })
     .then((product) => {
       if (req.body.tagIds && req.body.tagIds.length) {
+        // If there are new tagIds, handle productTag updates
         ProductTag.findAll({
           where: { product_id: req.params.id },
         }).then((productTags) => {
@@ -130,5 +134,5 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+// Export the router for use in other parts of the application
 module.exports = router;

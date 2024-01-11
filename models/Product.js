@@ -52,5 +52,5 @@ Product.init(
     modelName: "product",
   }
 );
-
+// Export the Product model for use in other parts of the application
 module.exports = Product;
